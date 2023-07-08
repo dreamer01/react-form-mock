@@ -11,7 +11,11 @@ interface StepProps {
 
 const Step = ({ position, label, active, onSelect }: StepProps) => {
   return (
-    <button onClick={() => onSelect(position)} className={Styles.stepView}>
+    <button
+      data-testId='step-component'
+      onClick={() => onSelect(position)}
+      className={Styles.stepView}
+    >
       <span className={clsx(Styles.stepCount, { [Styles.active]: active })}>
         {position}
       </span>

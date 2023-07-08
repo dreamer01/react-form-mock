@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 
 import { STEPS } from './content/steps';
-import Step from './components/Steps/Steps';
+import Step from './components/Step/Step';
 import Styles from './app.module.css';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className={Styles.wrapper}>
-      <main className={Styles.main}>
+      <main data-testId='step-form' className={Styles.main}>
         <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
         <section className={Styles.formView}>
           <form className={Styles.form}>Form</form>
