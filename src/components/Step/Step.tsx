@@ -12,7 +12,7 @@ interface StepProps {
 const Step = ({ position, label, active, onSelect }: StepProps) => {
   return (
     <button
-      data-testId='step-component'
+      data-testid='step-component'
       onClick={() => onSelect(position)}
       className={Styles.stepView}
     >

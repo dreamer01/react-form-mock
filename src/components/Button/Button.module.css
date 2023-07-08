@@ -1,0 +1,37 @@
+.button {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: var(--neutral-10);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+}
+
+.primary {
+  background: var(--primary);
+}
+
+.secondary {
+  background: var(--text);
+}
+
+.secondary.text {
+  background: transparent;
+  color: var(--neutral-50);
+}
+
+.secondary.text:hover {
+  color: var(--text);
+}
+
+.primary.text {
+  background: transparent;
+  color: var(--primary);
+}
