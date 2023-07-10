@@ -23,6 +23,8 @@ function App() {
     initialState
   );
 
+  const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
+
   const renderStep = (label: string, index: number): ReactElement => {
     return (
       <Step
@@ -35,11 +37,21 @@ function App() {
     );
   };
 
+  const handleNext = () => {
+    const currentStep = formData[formKey];
+    const currentValues = Object.values(currentStep);
+    const noError = currentValues.reduce((noError, { error }) => {
+      return noError && !error;
+    }, true);
+
+    if (noError) {
+      setStep((s) => s + 1);
+    }
+  };
+
   const handleSubmit = () => {
     console.log('Done', formData);
   };
-
-  const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
 
   return (
     <div className={Styles.wrapper}>
@@ -76,12 +88,7 @@ function App() {
                 Confirm
               </Button>
             ) : (
-              <Button
-                onClick={() => {
-                  setStep((s) => s + 1);
-                }}
-                variant='secondary'
-              >
+              <Button onClick={handleNext} variant='secondary'>
                 Next Step
               </Button>
             )}
