@@ -1,8 +1,30 @@
 .input {
   box-sizing: border-box;
+  outline: none;
   height: 40px;
   border: 2px solid var(--neutral-50);
   padding: 2px 16px;
   border-radius: 5px;
   width: 100%;
+  color: var(--text);
+}
+
+.labelView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.error {
+  font-size: 14px;
+  color: var(--error);
+}
+
+.input.error {
+  border: 2px solid var(--error);
 }
