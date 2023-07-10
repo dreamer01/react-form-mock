@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import Input from '../Input/Input';
-import Styles from './formStep.module.css';
+import Input from '../../Input/Input';
+import Styles from '../formStep.module.css';
 
 type FormField = {
   value: string;
@@ -27,7 +27,7 @@ const PersonalInfo = ({ value: personalInfo, onChange }: FormStepProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    let error: string = personalInfo[name].error;
+    let error: string = name && personalInfo[name]?.error;
     error = new RegExp(TestPatterns[name]).test(value)
       ? ''
       : `Please enter correct ${name} `;
@@ -40,7 +40,7 @@ const PersonalInfo = ({ value: personalInfo, onChange }: FormStepProps) => {
 
   // We can use props getter pattern for inputs, but I don't like it
   return (
-    <div>
+    <div data-testid='personal-info'>
       <h2>Personal Info</h2>
       <p className={Styles.subtext}>
         Please provide your name, email address and phone number
@@ -48,39 +48,38 @@ const PersonalInfo = ({ value: personalInfo, onChange }: FormStepProps) => {
       <div className={Styles.inputView}>
         <Input
           label='Name'
-          error={personalInfo.name.error}
+          error={personalInfo?.name?.error}
           required
           type='text'
-          name='name'
           id='name'
           placeholder='e.g. Tony Stark'
-          value={personalInfo.name.value}
+          value={personalInfo?.name?.value}
           onChange={handleChange}
         />
       </div>
       <div className={Styles.inputView}>
         <Input
           label='Email'
-          error={personalInfo.email.error}
+          error={personalInfo?.email?.error}
           required
           type='email'
           name='email'
           id='email'
           placeholder='e.g. ironbhai@stark.com'
-          value={personalInfo.email.value}
+          value={personalInfo?.email?.value}
           onChange={handleChange}
         />
       </div>
       <div className={Styles.inputView}>
         <Input
           label='Phone'
-          error={personalInfo.phone.error}
+          error={personalInfo?.phone?.error}
           required
           type='text'
           name='phone'
           id='phone'
           placeholder='e.g. +91 8888888888'
-          value={personalInfo.phone.value}
+          value={personalInfo?.phone?.value}
           onChange={handleChange}
         />
       </div>

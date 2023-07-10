@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Addon from '../components/FormSteps/AddOn';
-import PersonalInfo from '../components/FormSteps/PersonalInfo';
+import PersonalInfo from '../components/FormSteps/PersonalInfo/PersonalInfo';
 import SelectPlan from '../components/FormSteps/SelectPlan';
 import Summary from '../components/FormSteps/Summary';
 

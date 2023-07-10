@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 
 import { STEPS, FORM_STEPS } from './content/steps';
-import { PersonalInfoState } from './components/FormSteps/PersonalInfo';
+import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
 import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
