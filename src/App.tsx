@@ -1,13 +1,27 @@
 import { ReactElement, useState } from 'react';
 
-import { STEPS } from './content/steps';
+import { STEPS, FORM_STEPS } from './content/steps';
+import { PersonalInfoState } from './components/FormSteps/PersonalInfo';
 import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
 import Styles from './app.module.css';
 
+const initialState = {
+  personalInfo: {
+    name: { value: '', error: '' },
+    email: { value: '', error: '' },
+    phone: { value: '', error: '' },
+  },
+};
+
+type FormStates = PersonalInfoState;
+
 function App() {
   const [currentStep, setStep] = useState<number>(1);
+  const [formData, setFormData] = useState<{ [k: string]: FormStates }>(
+    initialState
+  );
 
   const renderStep = (label: string, index: number): ReactElement => {
     return (
@@ -21,14 +35,27 @@ function App() {
     );
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log('Done', formData);
+  };
+
+  const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
 
   return (
     <div className={Styles.wrapper}>
       <main data-testid='step-form' className={Styles.main}>
         <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
         <section className={Styles.formView}>
-          <form className={Styles.form}>Form</form>
+          <form className={Styles.form}>
+            {
+              <FormStep
+                value={formData[formKey]}
+                onChange={(infoObj: FormStates) =>
+                  setFormData({ [formKey]: infoObj })
+                }
+              />
+            }
+          </form>
           <footer className={Styles.footer}>
             {currentStep > 1 ? (
               <Button
@@ -45,7 +72,9 @@ function App() {
             )}
 
             {currentStep === STEPS.length ? (
-              <Button onClick={handleSubmit}>Confirm</Button>
+              <Button type='submit' onClick={handleSubmit}>
+                Confirm
+              </Button>
             ) : (
               <Button
                 onClick={() => {

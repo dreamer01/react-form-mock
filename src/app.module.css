@@ -17,13 +17,14 @@
 }
 
 .sidebar {
-  width: 32%;
+  width: 30%;
   background: var(--primary);
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px;
   padding: 20px;
 }
 
 .formView {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -33,6 +34,7 @@
 
 .form {
   flex: 1;
+  padding: 80px;
 }
 
 .footer {
@@ -56,7 +58,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: 150px;
+    height: 250px;
     box-sizing: border-box;
     border-radius: 0px;
   }
@@ -64,22 +66,26 @@
   .formView {
     flex-direction: row;
     border-radius: 0px;
-    position: relative;
     overflow: initial;
+    background-color: var(--neutral-30);
   }
 
   .form {
     position: absolute;
-    top: -20px;
+    box-sizing: border-box;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
-    height: 70%;
+    height: 80%;
     width: 85%;
     border-radius: 10px;
+    padding: 20px;
+    background-color: var(--neutral-10);
   }
 
   .footer {
     width: 100%;
     align-self: flex-end;
+    background-color: var(--neutral-10);
   }
 }
