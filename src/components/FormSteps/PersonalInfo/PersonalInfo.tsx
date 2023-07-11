@@ -12,7 +12,7 @@ export type PersonalInfoState = {
   [k: string]: FormField;
 };
 
-interface FormStepProps {
+interface PersonalInfoProps {
   value: PersonalInfoState;
   onChange: (info: PersonalInfoState) => void;
 }
@@ -23,7 +23,7 @@ const TestPatterns: { [k: string]: RegExp } = {
   phone: /\+?\d{2}\s\d{10}/,
 };
 
-const PersonalInfo = ({ value: personalInfo, onChange }: FormStepProps) => {
+const PersonalInfo = ({ value: personalInfo, onChange }: PersonalInfoProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 

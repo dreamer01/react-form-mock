@@ -7,7 +7,8 @@
 
   --text: hsl(213, 96%, 18%);
   --primary: hsl(243, 100%, 62%);
-  --light: hsl(228, 100%, 84%);
+  --very-light: hsl(226, 89%, 96%);
+  --light: hsl(229, 92%, 90%);
   --accent: hsl(206, 94%, 87%);
   --error: hsl(354, 84%, 57%);
 
@@ -29,6 +30,10 @@ body {
   margin: 0;
   width: 100%;
   color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 p,

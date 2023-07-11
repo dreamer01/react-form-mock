@@ -2,7 +2,7 @@ import React from 'react';
 
 import Addon from '../components/FormSteps/AddOn';
 import PersonalInfo from '../components/FormSteps/PersonalInfo/PersonalInfo';
-import SelectPlan from '../components/FormSteps/SelectPlan';
+import SelectPlan from '../components/FormSteps/SelectPlan/SelectPlan';
 import Summary from '../components/FormSteps/Summary';
 
 export const STEPS = ['Your Info', 'Select Plan', 'Add Ons', 'Summary'];

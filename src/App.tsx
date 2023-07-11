@@ -2,6 +2,7 @@ import { ReactElement, useState } from 'react';
 
 import { STEPS, FORM_STEPS } from './content/steps';
 import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
+import { SelectPlanState } from '@components/FormSteps/SelectPlan/SelectPlan';
 import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
@@ -13,15 +14,19 @@ const initialState = {
     email: { value: '', error: '' },
     phone: { value: '', error: '' },
   },
+  selectPlan: {
+    plan: { value: 'arcade', error: '' },
+    period: { value: 'monthly', error: '' },
+  },
 };
 
 type FormStates = PersonalInfoState;
 
 function App() {
   const [currentStep, setStep] = useState<number>(1);
-  const [formData, setFormData] = useState<{ [k: string]: FormStates }>(
-    initialState
-  );
+  const [formData, setFormData] = useState<{
+    [k: string]: FormStates | SelectPlanState;
+  }>(initialState);
 
   const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
 
@@ -62,7 +67,7 @@ function App() {
             {
               <FormStep
                 value={formData[formKey]}
-                onChange={(infoObj: FormStates) =>
+                onChange={(infoObj: FormStates | SelectPlanState) =>
                   setFormData({ [formKey]: infoObj })
                 }
               />

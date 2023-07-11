@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { screen, render } from '@test/test-utils';
+import { screen, render } from '../../../test/test-utils';
 import PersonalInfo from './PersonalInfo';
 
 const value = {};

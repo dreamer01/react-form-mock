@@ -3,6 +3,7 @@
 
 import * as vite from 'vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
 export default vite.defineConfig({
@@ -12,5 +13,8 @@ export default vite.defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+  },
+  resolve: {
+    alias: [{ find: '@', replacement: resolve(__dirname, './src') }],
   },
 });
