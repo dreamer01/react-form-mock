@@ -3,9 +3,7 @@ import { InputHTMLAttributes } from 'react';
 
 import Styles from './switch.module.css';
 
-interface SwitchProps
-  extends Omit<InputHTMLAttributes<HTMLElement>, 'defaultValue'> {
-  defaultValue?: boolean;
+interface SwitchProps extends InputHTMLAttributes<HTMLElement> {
   className?: string;
   offLabel?: string;
   onLabel?: string;
@@ -13,7 +11,6 @@ interface SwitchProps
 
 const Switch = ({
   id = Math.random().toString(36).substring(2, 9),
-  defaultValue = false,
   offLabel = 'Off',
   onLabel = 'On',
   className,
@@ -31,7 +28,6 @@ const Switch = ({
         className={Styles.input}
         id={id}
         type='checkbox'
-        defaultChecked={defaultValue}
         {...props}
       />
       <span className={Styles.slider}></span>
