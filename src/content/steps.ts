@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Addon from '../components/FormSteps/AddOn';
+import Addon from '../components/FormSteps/AddOn/AddOn';
 import PersonalInfo from '../components/FormSteps/PersonalInfo/PersonalInfo';
 import SelectPlan from '../components/FormSteps/SelectPlan/SelectPlan';
 import Summary from '../components/FormSteps/Summary';
@@ -11,6 +11,6 @@ export const STEPS = ['Your Info', 'Select Plan', 'Add Ons', 'Summary'];
 export const FORM_STEPS: [string, React.ElementType][] = [
   ['personalInfo', PersonalInfo],
   ['selectPlan', SelectPlan],
-  ['addon', Addon],
+  ['addOns', Addon],
   ['summary', Summary],
 ];

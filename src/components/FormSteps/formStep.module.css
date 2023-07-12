@@ -22,10 +22,8 @@
   width: -webkit-fill-available;
 
   padding: 16px;
-  border: 2px solid var(--neutral-40);
+  border: 1.5px solid var(--neutral-40);
   border-radius: 10px;
-  cursor: pointer;
-  text-align: left;
   font-weight: 600;
 }
 

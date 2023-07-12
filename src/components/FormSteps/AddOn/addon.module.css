@@ -1,0 +1,47 @@
+.subtext {
+  color: var(--neutral-50);
+}
+
+.cardView {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.labelCard {
+  border: 1.5px solid var(--neutral-50);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.labelCard:hover {
+  border-color: var(--primary);
+}
+
+.labelCard.selected {
+  background-color: var(--very-light);
+}
+
+.addonDetails {
+  margin-left: 16px;
+}
+
+.addonText {
+  color: var(--neutral-50);
+  font-size: 14px;
+}
+
+.price {
+  font-size: 14px;
+  color: var(--primary);
+}
+
+@media (max-width: 786px) {
+  .cardView {
+    margin-top: 24px;
+  }
+}

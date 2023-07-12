@@ -2,11 +2,12 @@ import { ReactElement, useState } from 'react';
 
 import { STEPS, FORM_STEPS } from './content/steps';
 import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
-import { SelectPlanState } from '@components/FormSteps/SelectPlan/SelectPlan';
+import { SelectPlanState } from './components/FormSteps/SelectPlan/SelectPlan';
 import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
 import Styles from './app.module.css';
+import { AddOnState } from '@components/FormSteps/AddOn/AddOn';
 
 const initialState = {
   personalInfo: {
@@ -18,6 +19,9 @@ const initialState = {
     plan: { value: 'arcade', error: '' },
     period: { value: 'monthly', error: '' },
   },
+  addOns: {
+    selected: { value: [], error: '' },
+  },
 };
 
 type FormStates = PersonalInfoState;
@@ -25,7 +29,7 @@ type FormStates = PersonalInfoState;
 function App() {
   const [currentStep, setStep] = useState<number>(1);
   const [formData, setFormData] = useState<{
-    [k: string]: FormStates | SelectPlanState;
+    [k: string]: FormStates | SelectPlanState | AddOnState;
   }>(initialState);
 
   const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
@@ -44,13 +48,15 @@ function App() {
 
   const handleNext = () => {
     const currentStep = formData[formKey];
-    const currentValues = Object.values(currentStep);
-    const noError = currentValues.reduce((noError, { error }) => {
-      return noError && !error;
-    }, true);
+    const allFields = Object.values(currentStep);
+    const noError = allFields.reduce(
+      (acc, { error }) => !!(acc && !error),
+      true
+    ) as boolean;
 
     if (noError) {
       setStep((s) => s + 1);
+      handleSubmit();
     }
   };
 
@@ -68,7 +74,7 @@ function App() {
               <FormStep
                 value={formData[formKey]}
                 onChange={(infoObj: FormStates | SelectPlanState) =>
-                  setFormData({ [formKey]: infoObj })
+                  setFormData({ ...formData, ...{ [formKey]: infoObj } })
                 }
               />
             }
