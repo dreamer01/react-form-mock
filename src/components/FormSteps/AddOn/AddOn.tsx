@@ -33,12 +33,14 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
 
       <div className={Styles.cardView}>
         <label
+          data-testid='online-label'
           className={clsx(Styles.labelCard, {
             [Styles.selected]: addOns.selected?.value?.includes('online'),
           })}
           htmlFor='online-service'
         >
           <Checkbox
+            data-testid='online-checkbox'
             name='online'
             onChange={handleChange}
             className={Styles.checkbox}
@@ -53,6 +55,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
           <p className={Styles.price}>₹49/mo</p>
         </label>
         <label
+          data-testid='storage-label'
           className={clsx(Styles.labelCard, {
             [Styles.selected]: addOns.selected?.value?.includes('storage'),
           })}
@@ -73,6 +76,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
           <p className={Styles.price}>₹49/mo</p>
         </label>
         <label
+          data-testid='customization-label'
           className={clsx(Styles.labelCard, {
             [Styles.selected]:
               addOns.selected?.value?.includes('customization'),
