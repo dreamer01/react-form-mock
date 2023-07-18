@@ -1,5 +1,6 @@
 import { ReactElement, useState } from 'react';
 
+// FIXME: Combine these constants
 import { STEPS, FORM_STEPS } from './content/steps';
 import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
 import { SelectPlanState } from './components/FormSteps/SelectPlan/SelectPlan';
@@ -9,6 +10,11 @@ import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
 import Styles from './app.module.css';
+
+// FIXME:
+// Should be close to what you will be sharing with BE.
+// Unnecessary complex state construction, over-engineered.
+// Error visibility should be at step level
 
 const initialState = {
   personalInfo: {
@@ -51,6 +57,7 @@ function App() {
     );
   };
 
+  // FIXME: Validation should be at individual step
   const handleNext = () => {
     const currentStepData = formData[stepName];
     const allFields = Object.values(currentStepData);
@@ -75,6 +82,7 @@ function App() {
         <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
         <section className={Styles.formView}>
           <form className={Styles.form}>
+            {/* TODO: Passing complete formData for cross-step access */}
             {FormStepComponent ? (
               <FormStepComponent
                 value={formData[stepName]}
@@ -86,6 +94,8 @@ function App() {
               <Summary formData={formData} goTo={setStep} />
             )}
           </form>
+
+          {/* TODO: Move to individual step for validation trigger and step transformation */}
           <footer className={Styles.footer}>
             {currentStep > 1 ? (
               <Button
