@@ -1,0 +1,59 @@
+.subtext {
+  color: var(--neutral-50);
+}
+
+.priceView {
+  margin-top: 40px;
+  padding: 16px;
+  background-color: var(--neutral-30);
+  border-radius: 10px;
+}
+
+.addonView {
+  border-top: 1px solid var(--neutral-40);
+  padding-top: 10px;
+}
+
+.valueRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label {
+  text-transform: capitalize;
+  color: var(--neutral-60);
+}
+
+.value {
+  font-weight: 600;
+  color: var(--neutral-70);
+}
+
+.planPrice {
+  text-transform: capitalize;
+  color: var(--neutral-70);
+  font-weight: bold;
+}
+
+.changeBtn {
+  background: transparent;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  padding: 0px;
+  color: var(--neutral-60);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.totalView {
+  padding: 16px;
+  font-weight: bold;
+}
+
+.totalPrice {
+  font-size: 20px;
+  color: var(--primary);
+}

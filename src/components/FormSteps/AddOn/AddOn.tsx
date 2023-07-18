@@ -1,7 +1,9 @@
 import { ChangeEvent } from 'react';
+import clsx from 'clsx';
+
+import { ADDONS } from '../../../content/price';
 import Checkbox from '../../Checkbox/Checkbox';
 import Styles from './addon.module.css';
-import clsx from 'clsx';
 
 export type AddOnState = {
   selected: { value: string[]; error: string };
@@ -45,6 +47,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
             onChange={handleChange}
             className={Styles.checkbox}
             id='online-service'
+            checked={addOns.selected?.value?.includes('online')}
           />
           <div className={Styles.addonDetails}>
             <h3>Online Service</h3>
@@ -66,6 +69,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
             onChange={handleChange}
             className={Styles.checkbox}
             id='storage'
+            checked={addOns.selected?.value?.includes('storage')}
           />
           <div className={Styles.addonDetails}>
             <h3>Larger Storage</h3>
@@ -88,6 +92,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
             onChange={handleChange}
             className={Styles.checkbox}
             id='customization'
+            checked={addOns.selected?.value?.includes('customization')}
           />
           <div className={Styles.addonDetails}>
             <h3>Customization</h3>

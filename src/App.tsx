@@ -3,11 +3,12 @@ import { ReactElement, useState } from 'react';
 import { STEPS, FORM_STEPS } from './content/steps';
 import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
 import { SelectPlanState } from './components/FormSteps/SelectPlan/SelectPlan';
+import { AddOnState } from './components/FormSteps/AddOn/AddOn';
+import Summary from './components/FormSteps/Summary/Summary';
 import Step from './components/Step/Step';
 import Button from './components/Button/Button';
 
 import Styles from './app.module.css';
-import { AddOnState } from '@components/FormSteps/AddOn/AddOn';
 
 const initialState = {
   personalInfo: {
@@ -24,15 +25,15 @@ const initialState = {
   },
 };
 
-type FormStates = PersonalInfoState;
+export type FormStates = PersonalInfoState | SelectPlanState | AddOnState;
 
 function App() {
   const [currentStep, setStep] = useState<number>(1);
   const [formData, setFormData] = useState<{
-    [k: string]: FormStates | SelectPlanState | AddOnState;
+    [k: string]: FormStates;
   }>(initialState);
 
-  const [formKey, FormStep] = FORM_STEPS[currentStep - 1];
+  const [formKey, FormStep] = FORM_STEPS[currentStep - 1] || [];
 
   const renderStep = (label: string, index: number): ReactElement => {
     return (
@@ -70,14 +71,16 @@ function App() {
         <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
         <section className={Styles.formView}>
           <form className={Styles.form}>
-            {
+            {FormStep ? (
               <FormStep
                 value={formData[formKey]}
-                onChange={(infoObj: FormStates | SelectPlanState) =>
+                onChange={(infoObj: FormStates) =>
                   setFormData({ ...formData, ...{ [formKey]: infoObj } })
                 }
               />
-            }
+            ) : (
+              <Summary formData={formData} goTo={setStep} />
+            )}
           </form>
           <footer className={Styles.footer}>
             {currentStep > 1 ? (

@@ -12,6 +12,8 @@
   --accent: hsl(206, 94%, 87%);
   --error: hsl(354, 84%, 57%);
 
+  --neutral-70: #394B61;
+  --neutral-60: #7B828E;
   --neutral-50: hsl(231, 11%, 63%);
   --neutral-40: hsl(229, 24%, 87%);
   --neutral-30: hsl(217, 100%, 97%);
@@ -48,5 +50,4 @@ h4 {
   width: 100%;
 }
 
-@media (prefers-color-scheme: light) {
-}
+@media (prefers-color-scheme: light) {}

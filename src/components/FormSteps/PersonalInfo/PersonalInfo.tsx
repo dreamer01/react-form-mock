@@ -52,6 +52,7 @@ const PersonalInfo = ({ value: personalInfo, onChange }: PersonalInfoProps) => {
           required
           type='text'
           id='name'
+          name='name'
           placeholder='e.g. Tony Stark'
           value={personalInfo?.name?.value}
           onChange={handleChange}

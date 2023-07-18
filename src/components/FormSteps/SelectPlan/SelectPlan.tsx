@@ -1,8 +1,9 @@
 import { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
-import Switch from '../../Switch/Switch';
+import { PLANS } from '../../../content/price';
 import { Advanced, Arcade, Pro } from '../../Icons/Icons';
+import Switch from '../../Switch/Switch';
 import Styles from '../formStep.module.css';
 
 type Plans = 'arcade' | 'advance' | 'pro';
