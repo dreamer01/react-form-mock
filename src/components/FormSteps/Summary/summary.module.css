@@ -53,7 +53,7 @@
   font-weight: bold;
 }
 
-.totalPrice {
+.totalAmount {
   font-size: 20px;
   color: var(--primary);
 }

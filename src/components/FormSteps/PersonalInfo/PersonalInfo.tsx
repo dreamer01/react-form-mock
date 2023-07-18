@@ -3,13 +3,15 @@ import { ChangeEvent } from 'react';
 import Input from '../../Input/Input';
 import Styles from '../formStep.module.css';
 
+type FormFieldsName = 'name' | 'email' | 'phone';
+
 type FormField = {
   value: string;
   error: string;
 };
 
 export type PersonalInfoState = {
-  [k: string]: FormField;
+  [k in FormFieldsName]: FormField;
 };
 
 interface PersonalInfoProps {
@@ -27,7 +29,7 @@ const PersonalInfo = ({ value: personalInfo, onChange }: PersonalInfoProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    let error: string = name && personalInfo[name]?.error;
+    let error: string = name && personalInfo[name as FormFieldsName]?.error;
     error = new RegExp(TestPatterns[name]).test(value)
       ? ''
       : `Please enter correct ${name} `;

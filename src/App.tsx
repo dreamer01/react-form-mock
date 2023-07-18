@@ -33,10 +33,11 @@ export type FormData = {
 };
 
 function App() {
+  // Step value is starting from 1 and not the array index 0
   const [currentStep, setStep] = useState<number>(1);
   const [formData, setFormData] = useState<FormData>(initialState as FormData);
 
-  const [formKey, FormStep] = FORM_STEPS[currentStep - 1] || [];
+  const [stepName, FormStepComponent] = FORM_STEPS[currentStep - 1] || [];
 
   const renderStep = (label: string, index: number): ReactElement => {
     return (
@@ -51,8 +52,8 @@ function App() {
   };
 
   const handleNext = () => {
-    const currentStep = formData[formKey];
-    const allFields = Object.values(currentStep);
+    const currentStepData = formData[stepName];
+    const allFields = Object.values(currentStepData);
     const noError = allFields.reduce(
       (acc, { error }) => !!(acc && !error),
       true
@@ -74,11 +75,11 @@ function App() {
         <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
         <section className={Styles.formView}>
           <form className={Styles.form}>
-            {FormStep ? (
-              <FormStep
-                value={formData[formKey]}
-                onChange={(infoObj: FormStates) =>
-                  setFormData({ ...formData, ...{ [formKey]: infoObj } })
+            {FormStepComponent ? (
+              <FormStepComponent
+                value={formData[stepName]}
+                onChange={(stepData: FormStates) =>
+                  setFormData({ ...formData, ...{ [stepName]: stepData } })
                 }
               />
             ) : (

@@ -3,7 +3,7 @@ import { STEPS } from '../../../content/steps';
 import { PLANS_PRICE, ADDONS_PRICE, AddonsName } from '../../../content/price';
 import Styles from './summary.module.css';
 
-interface SummaryProps {
+export interface SummaryProps {
   formData: FormData;
   goTo: (step: number) => void;
 }
@@ -13,11 +13,11 @@ const Summary = ({ formData, goTo }: SummaryProps) => {
   const { plan, period } = formData.selectPlan;
   const multiplier = period.value === 'yearly' ? 10 : 1;
 
-  let totalPrice = PLANS_PRICE[plan.value] * multiplier;
+  let totalAmount = PLANS_PRICE[plan.value] * multiplier;
 
   const renderAddonPrice = (addOn: AddonsName) => {
     const addOnPrice = ADDONS_PRICE[addOn].price * multiplier;
-    totalPrice += addOnPrice;
+    totalAmount += addOnPrice;
     return (
       <div key={addOn} className={Styles.valueRow}>
         <p className={Styles.label}>{addOn}</p>
@@ -52,7 +52,9 @@ const Summary = ({ formData, goTo }: SummaryProps) => {
 
       <div className={`${Styles.valueRow} ${Styles.totalView}`}>
         <p className={Styles.label}>{`Total(per ${period.value})`}</p>
-        <p className={Styles.totalPrice}>₹{totalPrice}</p>
+        <p data-testid='total-amount' className={Styles.totalAmount}>
+          ₹{totalAmount}
+        </p>
       </div>
     </div>
   );
