@@ -1,25 +1,22 @@
-import { FormStates } from '../../../../src/App';
-
+import { FormData } from '../../../../src/App';
 import { STEPS } from '../../../content/steps';
-import { PLANS, ADDONS } from '../../../content/price';
+import { PLANS_PRICE, ADDONS_PRICE, AddonsName } from '../../../content/price';
 import Styles from './summary.module.css';
 
 interface SummaryProps {
-  formData: {
-    [k: string]: FormStates;
-  };
+  formData: FormData;
   goTo: (step: number) => void;
 }
 
 const Summary = ({ formData, goTo }: SummaryProps) => {
   const addOns = formData.addOns.selected.value;
-  const { plan, period } = formData?.selectPlan;
+  const { plan, period } = formData.selectPlan;
   const multiplier = period.value === 'yearly' ? 10 : 1;
 
-  let totalPrice = PLANS[plan.value] * multiplier;
+  let totalPrice = PLANS_PRICE[plan.value] * multiplier;
 
-  const renderAddonPrice = (addOn: string) => {
-    const addOnPrice = ADDONS[addOn] * multiplier;
+  const renderAddonPrice = (addOn: AddonsName) => {
+    const addOnPrice = ADDONS_PRICE[addOn].price * multiplier;
     totalPrice += addOnPrice;
     return (
       <div key={addOn} className={Styles.valueRow}>
@@ -37,7 +34,7 @@ const Summary = ({ formData, goTo }: SummaryProps) => {
       </p>
       <div className={Styles.priceView}>
         <div className={`${Styles.valueRow} ${Styles.planPrice}`}>
-          <p>
+          <div>
             <p>{`${plan?.value}(${period?.value})`}</p>
             <button
               className={Styles.changeBtn}
@@ -45,8 +42,8 @@ const Summary = ({ formData, goTo }: SummaryProps) => {
             >
               Change
             </button>
-          </p>
-          <p>₹{PLANS[plan.value] * multiplier}</p>
+          </div>
+          <p>₹{PLANS_PRICE[plan.value] * multiplier}</p>
         </div>
         {!!addOns.length && (
           <div className={Styles.addonView}>{addOns.map(renderAddonPrice)}</div>

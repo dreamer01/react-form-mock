@@ -40,6 +40,10 @@
   margin-top: 20px;
 }
 
+.planName {
+  text-transform: capitalize;
+}
+
 .planPrice {
   color: var(--neutral-50);
   margin-bottom: 8px;

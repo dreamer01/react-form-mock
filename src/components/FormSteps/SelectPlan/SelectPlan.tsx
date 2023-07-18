@@ -1,15 +1,13 @@
 import { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
-import { PLANS } from '../../../content/price';
+import { PLANS_PRICE, PlansName } from '../../../content/price';
 import { Advanced, Arcade, Pro } from '../../Icons/Icons';
 import Switch from '../../Switch/Switch';
 import Styles from '../formStep.module.css';
 
-type Plans = 'arcade' | 'advance' | 'pro';
-
 export type SelectPlanState = {
-  plan: { value: Plans; error: string };
+  plan: { value: PlansName; error: string };
   period: { value: 'monthly' | 'yearly'; error: string };
 };
 
@@ -18,8 +16,10 @@ interface SelectPlanProps {
   onChange: (info: SelectPlanState) => void;
 }
 
+const Icons = { advance: Advanced, arcade: Arcade, pro: Pro };
+
 const SelectPlan = ({ value: selectPlan, onChange }: SelectPlanProps) => {
-  const handlePlan = (selectedPlan: Plans) => {
+  const handlePlan = (selectedPlan: PlansName) => {
     onChange({
       ...selectPlan,
       ...{ plan: { value: selectedPlan, error: '' } },
@@ -35,54 +35,32 @@ const SelectPlan = ({ value: selectPlan, onChange }: SelectPlanProps) => {
         You have option to select monthly or yearly plan
       </p>
       <div className={Styles.plansView}>
-        <button
-          type='button'
-          className={clsx(Styles.planCard, {
-            [Styles.selected]: selectPlan?.plan?.value === 'arcade',
-          })}
-          onClick={() => handlePlan('arcade')}
-        >
-          <Arcade />
-          <div className={Styles.planDetails}>
-            <h3>Arcade</h3>
-            <p className={Styles.planPrice}>
-              {isYearly ? '₹990/year' : '₹99/month'}
-            </p>
-            {isYearly && <p className={Styles.freeMsg}>2 months free</p>}
-          </div>
-        </button>
-        <button
-          type='button'
-          className={clsx(Styles.planCard, {
-            [Styles.selected]: selectPlan?.plan?.value === 'advance',
-          })}
-          onClick={() => handlePlan('advance')}
-        >
-          <Advanced />
-          <div className={Styles.planDetails}>
-            <h3>Advance</h3>
-            <p className={Styles.planPrice}>
-              {isYearly ? '₹1990/year' : '₹199/month'}
-            </p>
-            {isYearly && <p className={Styles.freeMsg}>2 months free</p>}
-          </div>
-        </button>
-        <button
-          type='button'
-          className={clsx(Styles.planCard, {
-            [Styles.selected]: selectPlan?.plan?.value === 'pro',
-          })}
-          onClick={() => handlePlan('pro')}
-        >
-          <Pro />
-          <div className={Styles.planDetails}>
-            <h3>Pro</h3>
-            <p className={Styles.planPrice}>
-              {isYearly ? '₹2990/year' : '₹299/month'}
-            </p>
-            {isYearly && <p className={Styles.freeMsg}>2 months free</p>}
-          </div>
-        </button>
+        {(Object.keys(PLANS_PRICE) as Array<PlansName>).map(
+          (plan: PlansName) => {
+            const PlanIcon = Icons[plan];
+            return (
+              <button
+                key={plan}
+                type='button'
+                className={clsx(Styles.planCard, {
+                  [Styles.selected]: selectPlan?.plan?.value === plan,
+                })}
+                onClick={() => handlePlan(plan)}
+              >
+                <PlanIcon />
+                <div className={Styles.planDetails}>
+                  <h3 className={Styles.planName}>{plan}</h3>
+                  <p className={Styles.planPrice}>
+                    {isYearly
+                      ? `₹${PLANS_PRICE[plan] * 10}/year`
+                      : `₹${PLANS_PRICE[plan]}/month`}
+                  </p>
+                  {isYearly && <p className={Styles.freeMsg}>2 months free</p>}
+                </div>
+              </button>
+            );
+          }
+        )}
       </div>
       <div className={Styles.switchView}>
         <Switch

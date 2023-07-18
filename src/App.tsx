@@ -26,12 +26,15 @@ const initialState = {
 };
 
 export type FormStates = PersonalInfoState | SelectPlanState | AddOnState;
+export type FormData = {
+  personalInfo: PersonalInfoState;
+  selectPlan: SelectPlanState;
+  addOns: AddOnState;
+};
 
 function App() {
   const [currentStep, setStep] = useState<number>(1);
-  const [formData, setFormData] = useState<{
-    [k: string]: FormStates;
-  }>(initialState);
+  const [formData, setFormData] = useState<FormData>(initialState as FormData);
 
   const [formKey, FormStep] = FORM_STEPS[currentStep - 1] || [];
 

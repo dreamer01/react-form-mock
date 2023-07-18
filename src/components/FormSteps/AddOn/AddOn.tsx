@@ -1,12 +1,12 @@
 import { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
-import { ADDONS } from '../../../content/price';
+import { ADDONS_PRICE, AddonsName } from '../../../content/price';
 import Checkbox from '../../Checkbox/Checkbox';
 import Styles from './addon.module.css';
 
 export type AddOnState = {
-  selected: { value: string[]; error: string };
+  selected: { value: AddonsName[]; error: string };
 };
 
 interface AddOnProps {
@@ -18,7 +18,7 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     if (checked && addOns.selected) {
-      const newValue = [...addOns.selected.value, name];
+      const newValue = [...addOns.selected.value, name as AddonsName];
       onChange({
         selected: { value: newValue, error: '' },
       });
@@ -34,74 +34,30 @@ const Addon = ({ value: addOns, onChange }: AddOnProps) => {
       <p className={Styles.subtext}>Add ons helps you get better experience</p>
 
       <div className={Styles.cardView}>
-        <label
-          data-testid='online-label'
-          className={clsx(Styles.labelCard, {
-            [Styles.selected]: addOns.selected?.value?.includes('online'),
-          })}
-          htmlFor='online-service'
-        >
-          <Checkbox
-            data-testid='online-checkbox'
-            name='online'
-            onChange={handleChange}
-            className={Styles.checkbox}
-            id='online-service'
-            checked={addOns.selected?.value?.includes('online')}
-          />
-          <div className={Styles.addonDetails}>
-            <h3>Online Service</h3>
-            <p className={Styles.addonText}>
-              Access to other users and their projects
-            </p>
-          </div>
-          <p className={Styles.price}>₹49/mo</p>
-        </label>
-        <label
-          data-testid='storage-label'
-          className={clsx(Styles.labelCard, {
-            [Styles.selected]: addOns.selected?.value?.includes('storage'),
-          })}
-          htmlFor='storage'
-        >
-          <Checkbox
-            name='storage'
-            onChange={handleChange}
-            className={Styles.checkbox}
-            id='storage'
-            checked={addOns.selected?.value?.includes('storage')}
-          />
-          <div className={Styles.addonDetails}>
-            <h3>Larger Storage</h3>
-            <p className={Styles.addonText}>
-              Extra 1TB of the cloud save for backups.
-            </p>
-          </div>
-          <p className={Styles.price}>₹49/mo</p>
-        </label>
-        <label
-          data-testid='customization-label'
-          className={clsx(Styles.labelCard, {
-            [Styles.selected]:
-              addOns.selected?.value?.includes('customization'),
-          })}
-          htmlFor='customization'
-        >
-          <Checkbox
-            name='customization'
-            onChange={handleChange}
-            className={Styles.checkbox}
-            id='customization'
-            checked={addOns.selected?.value?.includes('customization')}
-          />
-          <div className={Styles.addonDetails}>
-            <h3>Customization</h3>
-            <p className={Styles.addonText}>
-              Custom profile theme and app experience
-            </p>
-          </div>
-          <p className={Styles.price}>₹29/mo</p>
-        </label>
+        {(Object.keys(ADDONS_PRICE) as Array<AddonsName>).map((addon) => (
+          <label
+            key={addon}
+            data-testid={`${addon}-label`}
+            className={clsx(Styles.labelCard, {
+              [Styles.selected]: addOns.selected?.value?.includes(addon),
+            })}
+            htmlFor={`${addon}-service`}
+          >
+            <Checkbox
+              data-testid={`${addon}-checkbox`}
+              name={addon}
+              onChange={handleChange}
+              className={Styles.checkbox}
+              id={`${addon}-service`}
+              checked={addOns.selected?.value?.includes(addon)}
+            />
+            <div className={Styles.addonDetails}>
+              <h3>{ADDONS_PRICE[addon].label}</h3>
+              <p className={Styles.addonText}>{ADDONS_PRICE[addon].subText}</p>
+            </div>
+            <p className={Styles.price}>₹${ADDONS_PRICE[addon].price}/mo</p>
+          </label>
+        ))}
       </div>
     </div>
   );
