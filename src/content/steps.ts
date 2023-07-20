@@ -5,7 +5,7 @@ import Summary from '../components/FormSteps/Summary/Summary';
 
 export const STEPS = {
   'Your Info': PersonalInfo,
-  // 'Select Plan': SelectPlan,
-  // 'Add Ons': Addon,
+  'Select Plan': SelectPlan,
+  'Add Ons': Addon,
   // Summary: Summary,
 };

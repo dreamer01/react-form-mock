@@ -11,7 +11,7 @@ const initialState = {
   phone: '',
   plan: 'arcade',
   period: 'monthly',
-  addOns: [],
+  addOns: [''],
 };
 
 export type FormData = typeof initialState;
