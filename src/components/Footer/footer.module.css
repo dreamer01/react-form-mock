@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+@media (max-width: 786px) {
+  .footer {
+    width: 100%;
+    align-self: flex-end;
+    background-color: var(--neutral-10);
+  }
+}
