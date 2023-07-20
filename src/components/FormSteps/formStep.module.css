@@ -63,6 +63,20 @@
   margin-top: 40px;
 }
 
+.formView {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 0px 10px 10px 0px;
+  overflow: hidden;
+}
+
+.form {
+  flex: 1;
+  padding: 80px;
+}
+
 @media (max-width: 786px) {
   .plansView {
     flex-direction: column;
@@ -77,5 +91,25 @@
   .planDetails {
     margin-top: 0px;
     margin-left: 20px;
+  }
+
+  .formView {
+    flex-direction: row;
+    border-radius: 0px;
+    overflow: initial;
+    background-color: var(--neutral-30);
+  }
+
+  .form {
+    position: absolute;
+    box-sizing: border-box;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 80%;
+    width: 85%;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--neutral-10);
   }
 }

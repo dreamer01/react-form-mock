@@ -3,7 +3,7 @@ import Styles from './footer.module.css';
 
 export interface FooterProps {
   position?: string;
-  handleBack: () => void;
+  handleBack?: () => void;
   handleNext: () => void;
 }
 

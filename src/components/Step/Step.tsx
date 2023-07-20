@@ -6,14 +6,14 @@ interface StepProps {
   label: string;
   position: number;
   active: boolean;
-  onSelect: (position: number) => void;
+  onSelect?: (position: number) => void;
 }
 
 const Step = ({ position, label, active, onSelect }: StepProps) => {
   return (
     <button
       data-testid='step-component'
-      onClick={() => onSelect(position)}
+      onClick={() => onSelect && onSelect(position)}
       className={Styles.stepView}
     >
       <span className={clsx(Styles.stepCount, { [Styles.active]: active })}>
