@@ -1,49 +1,27 @@
 import { ReactElement, useState } from 'react';
 
-// FIXME: Combine these constants
-import { STEPS, FORM_STEPS } from './content/steps';
-import { PersonalInfoState } from './components/FormSteps/PersonalInfo/PersonalInfo';
-import { SelectPlanState } from './components/FormSteps/SelectPlan/SelectPlan';
-import { AddOnState } from './components/FormSteps/AddOn/AddOn';
-import Summary from './components/FormSteps/Summary/Summary';
+import { STEPS } from './content/steps';
 import Step from './components/Step/Step';
-import Button from './components/Button/Button';
 
 import Styles from './app.module.css';
 
-// FIXME:
-// Should be close to what you will be sharing with BE.
-// Unnecessary complex state construction, over-engineered.
-// Error visibility should be at step level
-
 const initialState = {
-  personalInfo: {
-    name: { value: '', error: '' },
-    email: { value: '', error: '' },
-    phone: { value: '', error: '' },
-  },
-  selectPlan: {
-    plan: { value: 'arcade', error: '' },
-    period: { value: 'monthly', error: '' },
-  },
-  addOns: {
-    selected: { value: [], error: '' },
-  },
+  name: '',
+  email: '',
+  phone: '',
+  plan: 'arcade',
+  period: 'monthly',
+  addOns: [],
 };
 
-export type FormStates = PersonalInfoState | SelectPlanState | AddOnState;
-export type FormData = {
-  personalInfo: PersonalInfoState;
-  selectPlan: SelectPlanState;
-  addOns: AddOnState;
-};
+export type FormData = typeof initialState;
 
 function App() {
   // Step value is starting from 1 and not the array index 0
   const [currentStep, setStep] = useState<number>(1);
-  const [formData, setFormData] = useState<FormData>(initialState as FormData);
+  const [formData, setFormData] = useState<FormData>(initialState);
 
-  const [stepName, FormStepComponent] = FORM_STEPS[currentStep - 1] || [];
+  const FormStepComponent = Object.values(STEPS)[currentStep - 1];
 
   const renderStep = (label: string, index: number): ReactElement => {
     return (
@@ -52,76 +30,22 @@ function App() {
         label={label}
         position={index + 1}
         active={currentStep === index + 1}
-        onSelect={setStep}
       />
     );
-  };
-
-  // FIXME: Validation should be at individual step
-  const handleNext = () => {
-    const currentStepData = formData[stepName];
-    const allFields = Object.values(currentStepData);
-    const noError = allFields.reduce(
-      (acc, { error }) => !!(acc && !error),
-      true
-    ) as boolean;
-
-    if (noError) {
-      setStep((s) => s + 1);
-      handleSubmit();
-    }
-  };
-
-  const handleSubmit = () => {
-    console.log('Done', formData);
   };
 
   return (
     <div className={Styles.wrapper}>
       <main data-testid='step-form' className={Styles.main}>
-        <section className={Styles.sidebar}>{STEPS.map(renderStep)}</section>
-        <section className={Styles.formView}>
-          <form className={Styles.form}>
-            {/* TODO: Passing complete formData for cross-step access */}
-            {FormStepComponent ? (
-              <FormStepComponent
-                value={formData[stepName]}
-                onChange={(stepData: FormStates) =>
-                  setFormData({ ...formData, ...{ [stepName]: stepData } })
-                }
-              />
-            ) : (
-              <Summary formData={formData} goTo={setStep} />
-            )}
-          </form>
-
-          {/* TODO: Move to individual step for validation trigger and step transformation */}
-          <footer className={Styles.footer}>
-            {currentStep > 1 ? (
-              <Button
-                onClick={() => {
-                  setStep((s) => s - 1);
-                }}
-                kind='text'
-                variant='secondary'
-              >
-                Go Back
-              </Button>
-            ) : (
-              <p />
-            )}
-
-            {currentStep === STEPS.length ? (
-              <Button type='submit' onClick={handleSubmit}>
-                Confirm
-              </Button>
-            ) : (
-              <Button onClick={handleNext} variant='secondary'>
-                Next Step
-              </Button>
-            )}
-          </footer>
+        <section className={Styles.sidebar}>
+          {Object.keys(STEPS).map(renderStep)}
         </section>
+
+        <FormStepComponent
+          goto={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
       </main>
     </div>
   );
