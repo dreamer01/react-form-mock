@@ -1,3 +1,4 @@
+import Thanks from '../components/FormSteps/Thanks/Thanks';
 import Addon from '../components/FormSteps/AddOn/AddOn';
 import PersonalInfo from '../components/FormSteps/PersonalInfo/PersonalInfo';
 import SelectPlan from '../components/FormSteps/SelectPlan/SelectPlan';
@@ -8,4 +9,5 @@ export const STEPS = {
   'Select Plan': SelectPlan,
   'Add Ons': Addon,
   Summary: Summary,
+  Thanks: Thanks,
 };
