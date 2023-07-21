@@ -29,8 +29,23 @@ const Summary = ({ formData, goto }: FormStepProps) => {
   };
 
   const handleSubmit = () => {
-    console.log({ formData });
-    // goto((v) => v + 1);
+    fetch('http://www.mocky.io/v2/5d9d9219310000153650e30b', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 300) return res.json();
+        else throw new Error(`Request Failed, ${res.status}`);
+      })
+      .then(({ result }) => {
+        if (result === 'success') goto((v) => v + 1);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
