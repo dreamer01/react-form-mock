@@ -7,5 +7,5 @@ export const STEPS = {
   'Your Info': PersonalInfo,
   'Select Plan': SelectPlan,
   'Add Ons': Addon,
-  // Summary: Summary,
+  Summary: Summary,
 };

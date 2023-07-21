@@ -18,7 +18,7 @@ const Addon = ({ formData, setFormData, goto }: FormStepProps) => {
     if (checked) {
       setFormData({
         ...formData,
-        addOns: [...addOns, name],
+        addOns: [...addOns, name as AddonsName],
       });
     } else {
       const updatedAddOns = addOns.filter((v) => v !== name);
