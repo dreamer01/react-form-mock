@@ -19,9 +19,7 @@ const Footer = ({ position = '', handleBack, handleNext }: FooterProps) => {
       )}
 
       {position === 'last' ? (
-        <Button type='submit' onClick={handleNext}>
-          Confirm
-        </Button>
+        <Button onClick={handleNext}>Confirm</Button>
       ) : (
         <Button onClick={handleNext} variant='secondary'>
           Next Step

@@ -6,11 +6,6 @@ import { FormStepProps } from '../index';
 import FormStyles from '../formStep.module.css';
 import Styles from './summary.module.css';
 
-export interface SummaryProps {
-  formData: FormData;
-  goTo: (step: number) => void;
-}
-
 const Summary = ({ formData, goto }: FormStepProps) => {
   const { plan, period, addOns } = formData;
   const multiplier = period === 'yearly' ? 10 : 1;
@@ -62,6 +57,7 @@ const Summary = ({ formData, goto }: FormStepProps) => {
               <div>
                 <p>{`${plan}(${period})`}</p>
                 <button
+                  type='button'
                   className={Styles.changeBtn}
                   onClick={() =>
                     goto(Object.keys(STEPS).indexOf('Select Plan') + 1)

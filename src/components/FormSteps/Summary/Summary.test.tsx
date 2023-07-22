@@ -1,34 +1,19 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { render, screen } from '../../../test/test-utils';
-import { FormData } from '../../../App';
-import Summary, { SummaryProps } from './Summary';
+import { mockFormData, mockGoto, mockSetFormData } from '../../../test/mock';
+import { FormStepProps } from '../../FormSteps';
+import Summary from './Summary';
+
+const mockStepProps: FormStepProps = {
+  formData: mockFormData,
+  goto: mockGoto,
+  setFormData: mockSetFormData,
+};
 
 describe('Summary component', () => {
-  const formData = {
-    personalInfo: {
-      name: { value: '', error: '' },
-      email: { value: '', error: '' },
-      phone: { value: '', error: '' },
-    },
-    selectPlan: {
-      plan: { value: 'arcade', error: '' },
-      period: { value: 'yearly', error: '' },
-    },
-    addOns: {
-      selected: { value: ['online'], error: '' },
-    },
-  } as FormData;
-
-  const goTo = vi.fn();
-
-  const props: SummaryProps = {
-    formData: formData,
-    goTo,
-  };
-
   beforeEach(() => {
-    render(<Summary {...props} />);
+    render(<Summary {...mockStepProps} />);
   });
 
   it('renders the summary component', () => {
@@ -44,10 +29,10 @@ describe('Summary component', () => {
     expect(priceText[0]).toBeInTheDocument();
   });
 
-  it('goTo called when change button is clicked', () => {
+  it('goto called when change button is clicked', () => {
     const changeButton = screen.getByText('Change');
     changeButton.click();
-    expect(goTo).toHaveBeenCalledWith(expect.any(Number));
+    expect(mockGoto).toHaveBeenCalledWith(expect.any(Number));
   });
 
   it('total calculation', () => {

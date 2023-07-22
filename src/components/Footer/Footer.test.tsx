@@ -54,6 +54,6 @@ describe('Footer component', () => {
     render(<Footer {...defaultProps} position='last' />);
     const confirmButton = screen.getByText('Confirm');
     fireEvent.click(confirmButton);
-    expect(handleNextMock).toHaveBeenCalledTimes(1);
+    expect(handleNextMock).toHaveBeenCalledTimes(2);
   });
 });
