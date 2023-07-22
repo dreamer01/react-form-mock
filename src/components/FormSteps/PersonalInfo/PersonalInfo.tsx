@@ -48,14 +48,17 @@ const PersonalInfo = ({ formData, setFormData, goto }: FormStepProps) => {
 
   const handleNext = () => {
     const { name, email, phone } = personalInfo;
+    //  For value check without user attempting, and custom error message
     if (name.value && email.value && phone.value) {
-      setFormData({
-        ...formData,
-        name: name.value,
-        email: email.value,
-        phone: phone.value,
-      });
-      goto((v) => v + 1);
+      if (!name.error && !email.error && !phone.error) {
+        setFormData({
+          ...formData,
+          name: name.value,
+          email: email.value,
+          phone: phone.value,
+        });
+        goto((v) => v + 1);
+      }
     } else {
       setPersonalInfo({
         name: {

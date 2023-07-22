@@ -24,7 +24,7 @@ const Summary = ({ formData, goto }: FormStepProps) => {
   };
 
   const handleSubmit = () => {
-    fetch('http://www.mocky.io/v2/5d9d9219310000153650e30b', {
+    fetch('https://www.mocky.io/v2/5d9d9219310000153650e30b', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
