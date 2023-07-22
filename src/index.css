@@ -1,5 +1,4 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -27,7 +26,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Poppins-Regular'), url('/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Poppins-Bold'), url('/Poppins-Bold.ttf') format('truetype');
+}
+
 body {
+  font-family: Poppins;
   display: flex;
   margin: 0;
   width: 100%;
@@ -35,6 +49,7 @@ body {
 }
 
 * {
+  font-family: Poppins;
   box-sizing: border-box;
 }
 
