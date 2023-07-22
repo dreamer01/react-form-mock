@@ -1,0 +1,75 @@
+.plansView {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  gap: 16px;
+}
+
+.planCard {
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  width: -webkit-fill-available;
+
+  padding: 16px;
+  border: 1.5px solid var(--neutral-40);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.planCard:hover {
+  border-color: var(--primary);
+}
+
+.planCard.selected {
+  background-color: var(--very-light);
+  border-color: var(--primary);
+}
+
+.planDetails {
+  margin-top: 20px;
+}
+
+.planName {
+  text-transform: capitalize;
+}
+
+.planPrice {
+  color: var(--neutral-60);
+  margin-bottom: 8px;
+}
+
+.freeMsg {
+  color: var(--neutral-70);
+  font-size: 12px;
+}
+
+.switchView {
+  background-color: var(--very-light);
+  border-radius: 10px;
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+
+@media (max-width: 786px) {
+  .plansView {
+    flex-direction: column;
+  }
+
+  .planCard {
+    display: flex;
+    align-items: center;
+    margin-right: 0px;
+  }
+
+  .planDetails {
+    margin-top: 0px;
+    margin-left: 20px;
+  }
+}

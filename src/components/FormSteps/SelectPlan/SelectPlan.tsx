@@ -6,7 +6,8 @@ import { Advanced, Arcade, Pro } from '../../Icons/Icons';
 import { FormStepProps } from '../index';
 import Switch from '../../Switch/Switch';
 import Footer from '../../Footer/Footer';
-import Styles from '../formStep.module.css';
+import FormStyles from '../formStep.module.css';
+import Styles from './selectplan.module.css';
 
 const Icons = { advance: Advanced, arcade: Arcade, pro: Pro };
 
@@ -23,8 +24,8 @@ const SelectPlan = ({ goto, formData, setFormData }: FormStepProps) => {
   const isYearly = period === 'yearly';
 
   return (
-    <section className={Styles.formView}>
-      <form className={Styles.form}>
+    <section className={FormStyles.formView}>
+      <form className={FormStyles.form}>
         <div>
           <h2>Select your plan</h2>
           <p className={Styles.subtext}>

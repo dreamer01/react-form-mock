@@ -3,11 +3,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
 @media (max-width: 786px) {
   .footer {
-    width: 100%;
     align-self: flex-end;
     background-color: var(--neutral-10);
   }

@@ -46,7 +46,7 @@ function App() {
     <div className={Styles.wrapper}>
       <main data-testid='step-form' className={Styles.main}>
         <section className={Styles.sidebar}>
-          {Object.keys(STEPS).map(renderStep)}
+          {Object.keys(STEPS).slice(0, 4).map(renderStep)}
         </section>
 
         <FormStepComponent

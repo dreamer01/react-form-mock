@@ -14,6 +14,7 @@ export interface SummaryProps {
 const Summary = ({ formData, goto }: FormStepProps) => {
   const { plan, period, addOns } = formData;
   const multiplier = period === 'yearly' ? 10 : 1;
+  const periodLabel = period === 'yearly' ? 'year' : 'month';
 
   let totalAmount = PLANS_PRICE[plan] * multiplier;
 
@@ -79,7 +80,7 @@ const Summary = ({ formData, goto }: FormStepProps) => {
           </div>
 
           <div className={`${Styles.valueRow} ${Styles.totalView}`}>
-            <p className={Styles.label}>{`Total(per ${period})`}</p>
+            <p className={Styles.label}>{`Total(per ${periodLabel})`}</p>
             <p data-testid='total-amount' className={Styles.totalAmount}>
               ₹{totalAmount}
             </p>

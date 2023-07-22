@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.stepView:first-child {
+  margin-top: 80px;
+}
+
 .stepCount {
   display: flex;
   align-items: center;
@@ -46,6 +50,10 @@
 
 @media (max-width: 786px) {
   .stepView {
+    margin: 0px;
+  }
+
+  .stepView:first-child {
     margin: 0px;
   }
 
