@@ -1,4 +1,3 @@
-import { FormData } from '../../../../src/App';
 import { STEPS } from '../../../content/steps';
 import { PLANS_PRICE, ADDONS_PRICE, AddonsName } from '../../../content/price';
 import Footer from '../../Footer/Footer';
