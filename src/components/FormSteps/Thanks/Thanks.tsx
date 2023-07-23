@@ -9,8 +9,8 @@ const Thanks = ({ formData }: FormStepProps) => {
       <h1>Thank You</h1>
 
       <p className={Styles.subtext}>
-        Welcome to the Gamin, we are thrilled to have as a premium customer.{' '}
-        <strong>{formData.name}</strong>, lets enjoy this ride with an enhanced
+        Welcome <strong>{formData.name}</strong> to the Gamin, we are thrilled
+        to have you as a premium member. Enjoy this ride with an enhanced
         experience curated especially for you.
       </p>
     </div>

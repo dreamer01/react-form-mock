@@ -13,7 +13,7 @@ const Switch = ({
   id = Math.random().toString(36).substring(2, 9),
   offLabel = 'Off',
   onLabel = 'On',
-  className,
+  className = '',
   ...props
 }: SwitchProps) => {
   return (

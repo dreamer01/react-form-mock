@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { STEPS } from '../../../content/steps';
 import { PLANS_PRICE, ADDONS_PRICE, AddonsName } from '../../../content/price';
 import Footer from '../../Footer/Footer';
@@ -6,6 +8,7 @@ import FormStyles from '../formStep.module.css';
 import Styles from './summary.module.css';
 
 const Summary = ({ formData, goto }: FormStepProps) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
   const { plan, period, addOns } = formData;
   const multiplier = period === 'yearly' ? 10 : 1;
   const periodLabel = period === 'yearly' ? 'year' : 'month';
@@ -24,6 +27,7 @@ const Summary = ({ formData, goto }: FormStepProps) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     fetch('https://www.mocky.io/v2/5d9d9219310000153650e30b', {
       method: 'POST',
       headers: {
@@ -36,9 +40,11 @@ const Summary = ({ formData, goto }: FormStepProps) => {
         else throw new Error(`Request Failed, ${res.status}`);
       })
       .then(({ result }) => {
+        setLoading(false);
         if (result === 'success') goto((v) => v + 1);
       })
       .catch((error) => {
+        setLoading(false);
         console.error(error);
       });
   };
@@ -83,6 +89,7 @@ const Summary = ({ formData, goto }: FormStepProps) => {
         </div>
       </form>
       <Footer
+        isSubmitting={isLoading}
         position='last'
         handleBack={() => goto((v) => v - 1)}
         handleNext={handleSubmit}

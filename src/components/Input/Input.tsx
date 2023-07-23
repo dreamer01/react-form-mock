@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef(
   (
-    { className, label, error, ...props }: InputProps,
+    { className = '', label, error, ...props }: InputProps,
     ref: LegacyRef<HTMLInputElement>
   ) => {
     return (

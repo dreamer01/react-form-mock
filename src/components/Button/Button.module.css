@@ -35,3 +35,30 @@
   background: transparent;
   color: var(--primary);
 }
+
+.loaderView {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: var(--neutral-30);
+}
+
+.loaderView.text {
+  background: transparent;
+}
+
+.loader {
+  color: var(--primary);
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
