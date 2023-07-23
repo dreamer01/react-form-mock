@@ -17,7 +17,7 @@ const fillPersonalInfo = async ({ page }) => {
 
 test('Load page and fill personal info', fillPersonalInfo);
 
-test('Select plan and add ons and submit form', async ({ page }) => {
+test('Select plan and add ons and submit form', async ({ page, request }) => {
   await fillPersonalInfo({ page });
   await page.getByRole('button', { name: 'pro' }).click();
   await page.getByText('MonthlyYearly').click();
@@ -30,6 +30,10 @@ test('Select plan and add ons and submit form', async ({ page }) => {
   await page.getByRole('button', { name: 'Next Step' }).click();
   await page.getByRole('button', { name: 'Next Step' }).click();
   await page.getByRole('button', { name: 'Confirm' }).click();
+  const response = await request.post('/v2/5d9d9219310000153650e30b');
+  expect(response.ok()).toBeTruthy();
+  let responseBody = await response.json();
+  expect(responseBody.result).toBe('success');
   await expect(
     page.getByRole('heading', { name: 'Thank You' })
   ).toBeInViewport();
