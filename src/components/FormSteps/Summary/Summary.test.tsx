@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { render, screen } from '../../../test/test-utils';
+import { render, screen, userEvent } from '../../../test/test-utils';
 import { mockFormData, mockGoto, mockSetFormData } from '../../../test/mock';
 import { FormStepProps } from '../../FormSteps';
 import Summary from './Summary';
@@ -37,5 +37,10 @@ describe('Summary component', () => {
 
   it('total calculation', () => {
     expect(screen.getByTestId('total-amount').textContent).toEqual('₹1480');
+  });
+
+  it('confirm button submit', async () => {
+    await userEvent.click(screen.getByText('Confirm'));
+    expect(mockGoto).toHaveBeenCalled();
   });
 });

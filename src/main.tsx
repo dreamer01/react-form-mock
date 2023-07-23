@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import { worker } from './mocks/browser';
 import App from './App.tsx';
 import './index.css';
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && process.env.MOCKS === 'true') {
   try {
-    await worker.start({ quiet: true });
+    await import('./mocks/browser').then(async (module) => {
+      const { worker } = module;
+      await worker.start({ quiet: true });
+    });
   } catch (error) {
     console.warn('Error while starting mock worker \n', error);
   }
